@@ -15,6 +15,8 @@ def AND(x):
     # w(입력가중치), b(활성계수), = 파라미터
 
     a = np.sum(x * w) + b
+
+    # y = 1 if a > 0 else 0
     y = step(a)
 
     return y

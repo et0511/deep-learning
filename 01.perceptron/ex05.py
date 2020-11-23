@@ -5,6 +5,7 @@ import numpy as np
 from pathlib import Path
 try:
     sys.path.append(os.getcwd())
+    sys.path.append(os.path.join(Path(os.getcwd()), 'lib'))
     from ex02 import AND
     from ex03 import NAND
     from ex04 import OR
@@ -17,7 +18,7 @@ def XOR(x):
     a2 = OR(x)
     a3 = AND(np.array([a1, a2]))
 
-    y = a3
+    y = identity(a3)
 
     return y
 

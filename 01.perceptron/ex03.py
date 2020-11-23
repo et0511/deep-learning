@@ -13,6 +13,8 @@ def NAND(x):
     w, b = np.array([-0.5, -0.5]), 0.7
 
     a = np.sum(x * w) + b
+
+    # y = 1 if a > 0 else 0
     y = step(a)
 
     return y
