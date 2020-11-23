@@ -1,4 +1,4 @@
-# AND gate: perceptron
+# NAND gate: perceptron
 import os
 import sys
 import numpy as np
@@ -9,10 +9,8 @@ try:
 except ImportError:
     print('Library Module Can Not Found')
 
-
-def AND(x):
-    w, b = np.array([0.5, 0.5]), np.array(-0.7)
-    # w(입력가중치), b(활성계수), = 파라미터
+def NAND(x):
+    w, b = np.array([-0.5, -0.5]), 0.7
 
     a = np.sum(x * w) + b
     y = step(a)
@@ -21,19 +19,16 @@ def AND(x):
 
 
 if __name__ == '__main__':
-    y1 = AND(np.array([0, 0]))
+    y1 = NAND(np.array([0, 0]))
     print(y1)
 
-    y2 = AND(np.array([0, 1]))
+    y2 = NAND(np.array([0, 1]))
     print(y2)
 
-    y3 = AND(np.array([1, 0]))
+    y3 = NAND(np.array([1, 0]))
     print(y3)
 
-    y4 = AND(np.array([1, 1]))
+    y4 = NAND(np.array([1, 1]))
     print(y4)
-
-
-
 
 
