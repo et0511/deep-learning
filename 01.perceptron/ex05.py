@@ -6,6 +6,7 @@ from pathlib import Path
 try:
     sys.path.append(os.getcwd())
     sys.path.append(os.path.join(Path(os.getcwd()), 'lib'))
+    from common import indentity
     from ex02 import AND
     from ex03 import NAND
     from ex04 import OR
