@@ -18,4 +18,10 @@ def relu(x):
     return np.maximum(0, x)
 
 
+# identity activation function
+def identity(x):
+    return x
+
+
+
 
