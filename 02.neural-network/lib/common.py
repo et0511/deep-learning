@@ -28,6 +28,7 @@ def softmax_overflow(x):
     exp_x = np.exp(x)
     return exp_x / np.sum(exp_x)
 
+
 # softmax activation function: 오버플로우 대책 & 배치처리지원 수정
 def softmax(x):
     if  x.ndim == 2:
@@ -41,7 +42,31 @@ def softmax(x):
     return y
 
 
+# Sum of Squares Error(SSE)
+def sum_squares_error(y, t):
+    e = 0.5 * np.sum((y - t)**2)
+    return e
 
+# cross entropy error
+# t = one hot
+def cross_entropy_error_non_batch(y, t):
+    delta = 1.e-7
+    e = -np.sum(t * np.log(y + delta))
+    return e
+
+# cross entropy error
+# t = one hot
+# for batch
+def cross_entropy_error(y, t):
+    if y.ndim == 1:
+        y = y.reshape(1, y.size)
+        t = t.reshape(1, t.size)
+
+    batch_size = y.shape[0]
+
+    delta = 1.e-7
+    e = -np.sum(t * np.log(y + delta)) / batch_size
+    return e
 
 
 
