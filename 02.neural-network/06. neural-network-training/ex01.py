@@ -9,17 +9,17 @@ try:
 except ImportError:
     print('Library Module Can Not Found')
 
-t = [0., 0., 1., 0., 0., 0., 0., 0., 0., 0.]
+t = np.array([0., 0., 1., 0., 0., 0., 0., 0., 0., 0.])
 
 y1 = np.array([0.1, 0.05, 0.7, 0., 0.02, 0.03, 0.1, 0., 0., 0.])
 y2 = np.array([0.1, 0.05, 0., 0.4, 0.02, 0.03, 0.1, 0.3, 0., 0.])
 y3 = np.array([0., 0.92, 0.02, 0., 0.02, 0.03, 0.1, 0., 0., 0.])
 
 
-
 # print(np.sum(y1))
 # print(np.sum(y2))
 # print(np.sum(y3))
+
 
 # test
 print(sum_squares_error(y1, t))

@@ -69,4 +69,30 @@ def cross_entropy_error(y, t):
     return e
 
 
+def numerical_diff1(f, w, x, t):
+    pass
+    """
+    return 변수 x(벡터, 1차원 numpy array)에 대한 편미분 결과 반환(벡터, 1차원 numpy array)
+    : param f : 손실함수
+    : param x : 변수(벡터, 1차원 numpy array)
+    """
+    h = 1e-4
+    dw = np.zeros_like(w)
+
+    for i in range(w.size):
+        tmp = w[i]
+
+        w[i] = tmp + h
+        h1 = f(w, x, t)
+
+        w[i] = tmp - h
+        h2 = f(w, x, t)
+
+        dw[i] = (h1 - h2) / (2 * h)
+        w[i] = tmp
+
+    return dw
+
+numerical_gradient1 = numerical_diff1
+
 
