@@ -11,20 +11,32 @@ except ImportError:
 
 x = np.array([0.6, 0.9])       # 입력(x)            2 vector
 t = np.array([0., 0., 1.])     # label(one_hot)    3 vector
+params = {
+    'w1': np.array([[0.02, 0.224, 0.135], [0.01, 0.052, 0.345]]),
+    'b1': np.array([0.45, 0.23, 0.11])
+}
+
+def forward_progation():
+    w1 = params['w1']
+    b1 = params['b1']
+
+    a = np.dot(x, w1) + b1
+    y = softmax(a)
+    return y
 
 def loss(w):
-    a = np.dot(x, w)
-    y = softmax(a)                  # softmax(x @ w)
+    y = forward_progation()
     e = cross_entropy_error(y, t)
-
     return e
 
-_w = np.array([
-    [0.02, 0.224, 0.135],
-    [0.01, 0.052, 0.345]
-])                              # weight            2 x 3 matrix
+def numerical_gradient_net():
+    gradient = {
+        'w1': numerical_gradient2(loss, params['w1']),
+        'b1': numerical_gradient2(loss, params['b1'])
+    }
 
-g = numerical_gradient2(loss, _w)
+    return gradient
 
+g = numerical_gradient_net()
 print(g)
 

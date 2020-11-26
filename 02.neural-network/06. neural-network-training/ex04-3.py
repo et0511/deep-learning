@@ -12,11 +12,15 @@ except ImportError:
 x = np.array([0.6, 0.9])       # 입력(x)            2 vector
 t = np.array([0., 0., 1.])     # label(one_hot)    3 vector
 
-def loss(w):
+def forward_progation(w):
     a = np.dot(x, w)
-    y = softmax(a)                  # softmax(x @ w)
-    e = cross_entropy_error(y, t)
+    y = softmax(a)
+    return y
 
+
+def loss(w):
+    y = forward_progation(w)
+    e = cross_entropy_error(y, t)
     return e
 
 _w = np.array([
