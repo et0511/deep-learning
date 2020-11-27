@@ -23,7 +23,7 @@ def initialize(sz_input, sz_hidden, sz_output, w_init=0.01):
     params['b2'] = np.zeros(sz_output)
 
 
-def forward_progation(x):
+def forward_propagation(x):
     w1 = params['w1']
     b1 = params['b1']
     a1 = np.dot(x, w1) + b1
@@ -40,9 +40,18 @@ def forward_progation(x):
 
 
 def loss(x, t):
-    y = forward_progation(x)
+    y = forward_propagation(x)
     e = cross_entropy_error(y, t)
     return e
+
+
+def accuracy(x, t):
+    y = forward_propagation(x)
+    y = np.argmax(y, axis=1)
+    t = np.argmax(t, axis=1)
+
+    acc = np.sum(y == t) / float(x.shape[0])
+    return acc
 
 
 def numerical_gradient_net(x, t):
