@@ -33,5 +33,5 @@ print(train_accuracy, test_accuracy)
 # 학습 중에 1 epoch 별로 train/test accuracy를 각각 기록하여 추이를 비교하여야 한다.
 # 두 accuracy가 마지막까지 차이가 없는 것이 가장 바람직 하며,
 # 만약 차이가 나는 그 시점에서 찾아서 학습을 중지 하여야 한다. - early stopping
-
+#
 
