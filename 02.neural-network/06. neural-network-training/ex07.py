@@ -7,6 +7,7 @@ import os
 import pickle
 import sys
 from pathlib import Path
+from matplotlib import pyplot as plt
 try:
     sys.path.append(os.path.join(Path(os.getcwd()).parent, 'lib'))
     from mnist import load_mnist
@@ -19,14 +20,23 @@ except ImportError:
 (train_x, train_t), (test_x, test_t) = load_mnist(normalize=True, flatten=True, one_hot_label=True)
 
 # 2. load params dataset trained
-params_file = os.path.join(os.getcwd(), 'dataset', 'twolayer_params.pkl')
-with open(params_file, 'rb') as f:
-    network.params = pickle.load(f)
+trainacc_file = os.path.join(os.getcwd(), 'dataset', 'twolayer_train_accuracy.pkl')
+testacc_file = os.path.join(os.getcwd(), 'dataset', 'twolayer_test_accuracy.pkl')
 
-train_accuracy = network.accuracy(train_x, train_t)
-test_accuracy = network.accuracy(test_x, test_t)
+train_accuracies = None
+test_accuracies = None
 
-print(train_accuracy, test_accuracy)
+with open(trainacc_file, 'rb') as f:
+    train_accuracies = network.accuracy(train_x, train_t)
+    test_accuracies = network.accuracy(test_x, test_t)
+
+
+plt.plot(train_accuracies, label='train accuracy')
+plt.plot(test_accuracies, label='test accuracy')
+plt.xlabel('Epoch')
+plt.ylabel('Accuracy')
+
+plt.show()
 
 
 # train_accuracy와 test_accuracy가 일치하는 것은 Overfiiting이 발생하지 않았다는 것이다.
