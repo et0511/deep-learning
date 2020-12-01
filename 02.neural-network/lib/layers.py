@@ -9,12 +9,40 @@ try:
 except ImportError:
     print('Library Module Can Not Found')
 
+# Affine Layer
+class Affine:
+    def __init__(self, w, b):
+        self.x = None
+
+        self.w = w
+        self.b = b
+
+        self.dw = None
+        self.db = None
+
+    def forward(self, x):
+        # 역전파시 전치핼렬에 대한 내적을 대비
+        if x.ndim == 1:
+            x = x[np.newaxis, :]
+
+        self.x = x
+        out = np.dot(self.x, self.w) + self.b
+
+        return out
+
+    def backward(self, dout):
+        dx = np.dot(dout, self.w.T)
+        self.dw = np.dot(self.x.T, dout)
+        self.db = np.sum(dout, axis=0)
+
+        return dx
+
 
 # SoftmaxWithLoss Layer
 class SoftmaxWithLoss:
     def __init__(self):
-        self.x = None
         self.y = None
+        self.t = None
 
     def forward(self, x, t=None):
         self.y = softmax(x)
@@ -37,7 +65,7 @@ class SoftmaxWithLoss:
         return dx
 
 
-class Sogmoid:
+class Sigmoid:
     def __init__(self):
         self.out = None
 
