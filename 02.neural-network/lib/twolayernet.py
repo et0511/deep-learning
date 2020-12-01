@@ -5,7 +5,7 @@ import numpy as np
 from pathlib import Path
 try:
     sys.path.append(os.path.join(Path(os.getcwd()).parent, 'lib'))
-    from common import softmax, sigmoid, cross_entropy_error
+    from common import softmax, relu, sigmoid, cross_entropy_error
 except ImportError:
     print('Library Module Can Not Found')
 
@@ -28,7 +28,8 @@ def forward_propagation(x):
     b1 = params['b1']
     a1 = np.dot(x, w1) + b1
 
-    z1 = sigmoid(a1)
+    # z1 = sigmoid(a1)
+    z1 = relu(a1)
 
     w2 = params['w2']
     b2 = params['b2']
