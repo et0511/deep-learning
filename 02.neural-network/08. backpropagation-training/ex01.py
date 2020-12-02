@@ -4,7 +4,6 @@
 # Test: SGD based on Numerical Gradient
 import datetime
 import os
-import pickle
 import sys
 import time
 import numpy as np
@@ -12,7 +11,7 @@ from pathlib import Path
 try:
     sys.path.append(os.path.join(Path(os.getcwd()).parent, 'lib'))
     from mnist import load_mnist
-    import twolayernet as network
+    import twolayernet2 as network
 except ImportError:
     print('Library Module Can Not Found')
 
@@ -20,21 +19,22 @@ except ImportError:
 (train_x, train_t), (test_x, test_t) = load_mnist(normalize=True, flatten=True, one_hot_label=True)
 
 # 2. hyperparameters
-numiters = 1       # 12000
-szbatch = 100
-sztrain = train_x.shape[0]
-szepoch = sztrain/szbatch
-ratelearning = 0.1
+iterations = 1       # 12000
+batch_size = 100
+
+train_size = train_x.shape[0]
+# epoch_size = train_size/batch_size
+learning_rate = 0.1
 
 # 3. initialize network
-network.initialize(sz_input=train_x.shape[1], sz_hidden=50, sz_output=train_t.shape[1])
+network.initialize(input_size=train_x.shape[1], hidden_size=50, output_size=train_t.shape[1])
 
 # 4. training
 train_losses = []
 
-for idx in range(1, numiters+1):
+for idx in range(1, iterations+1):
     # 4-1. fetch mini-batch
-    batch_mask = np.random.choice(sztrain, szbatch)
+    batch_mask = np.random.choice(train_size, batch_size)
     train_x_batch = train_x[batch_mask]  # 100 x 784
     train_t_batch = train_t[batch_mask]  # 100 x 10
 
@@ -45,11 +45,11 @@ for idx in range(1, numiters+1):
 
     # 4-3. update parameter
     for key in network.params:
-        network.params[key] -= ratelearning * gradient[key]
+        network.params[key] -= learning_rate * gradient[key]
 
     # 4-4. train loss
     loss = network.loss(train_x_batch, train_t_batch)
     train_losses.append(loss)
 
-    print(f'#{idx}: loss:{loss}, elapsed time: {elapsed}s')
+    print(f'#{idx}: loss:{loss:.3f}, elapsed time: {elapsed:.3f}s')
 

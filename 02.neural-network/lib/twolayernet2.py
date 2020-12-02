@@ -18,11 +18,11 @@ params = dict()
 layers = []
 
 
-def initialize(sz_input, sz_hidden, sz_output, w_init=0.01):
-    params['w1'] = w_init * np.random.randn(sz_input, sz_hidden)
-    params['b1'] = np.zeros(sz_hidden)
-    params['w2'] = w_init * np.random.randn(sz_hidden, sz_output)
-    params['b2'] = np.zeros(sz_output)
+def initialize(input_size, hidden_size, output_size, init_weight=0.01):
+    params['w1'] = init_weight * np.random.randn(input_size, hidden_size)
+    params['b1'] = np.zeros(hidden_size)
+    params['w2'] = init_weight * np.random.randn(hidden_size, output_size)
+    params['b2'] = np.zeros(output_size)
 
     layers.append(Affine(params['w1'], params['b1']))
     layers.append(ReLU())
@@ -42,10 +42,10 @@ def forward_propagation(x, t=None):
 
     return x
 
+
 def backward_propagation(dout):
     for layer in layers[::-1]:
         dout = layer.backward(dout)
-
     return dout
 
 
