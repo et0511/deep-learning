@@ -35,9 +35,10 @@ for key in gradient_numerical:
     print(f'{key} difference: {diff}')
 
 # 6. 결론: 거의 차이 없음!
-# w1 difference: 5.051499101004186e-10
-# b1 difference: 2.837078797108595e-09
-
+# w1 difference: 3.878692123191609e-10
+# b1 difference: 2.062824756347251e-09
+# w2 difference: 5.088050640802983e-09
+# b2 difference: 1.404991117739951e-07
 
 
 

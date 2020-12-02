@@ -49,5 +49,5 @@ for idx in range(1, iterations+1):
     loss = network.loss(train_x_batch, train_t_batch)
     train_losses.append(loss)
 
-    print(f'#{idx}: loss:{loss:.3f}, elapsed time: {elapsed:.3f}s')
+    print(f'#{idx}: loss:{loss:.3f}, elapsed time: {elapsed:.3f}ms')
 

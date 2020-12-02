@@ -5,24 +5,23 @@ import numpy as np
 from pathlib import Path
 try:
     sys.path.append(os.path.join(Path(os.getcwd()).parent, 'lib'))
-    from layers import Affine, ReLU, SoftmaxWithLoss
+    from layers import ReLU, Affine, SoftmaxWithLoss
 except ImportError:
     print('Library Module Can Not Found')
 
 
-# params = {
-#     'w1': np.array([[0.02, 0.224, 0.135], [0.01, 0.052, 0.345]]),
-#     'b1': np.array([0.45, 0.23, 0.11])
-# }
 params = dict()
 layers = []
 
 
-def initialize(input_size, hidden_size, output_size, init_weight=0.01):
-    params['w1'] = init_weight * np.random.randn(input_size, hidden_size)
-    params['b1'] = np.zeros(hidden_size)
-    params['w2'] = init_weight * np.random.randn(hidden_size, output_size)
-    params['b2'] = np.zeros(output_size)
+def initialize(input_size, hidden_size, output_size, init_weight=0.01, init_params=None):
+    if init_params is None:
+        params['w1'] = init_weight * np.random.randn(input_size, hidden_size)
+        params['b1'] = np.zeros(hidden_size)
+        params['w2'] = init_weight * np.random.randn(hidden_size, output_size)
+        params['b2'] = np.zeros(output_size)
+    else:
+        globals()['params'] = init_params
 
     layers.append(Affine(params['w1'], params['b1']))
     layers.append(ReLU())
@@ -39,7 +38,6 @@ def forward_propagation(x, t=None):
 #                x = layer.forward(x, t)
 #        else:
 #            x = layer.forward(x)
-
     return x
 
 
@@ -76,7 +74,7 @@ def backpropagation_gradient_net(x, t):
             gradient[f'w{idxaffine}'] = layer.dw
             gradient[f'b{idxaffine}'] = layer.db
 
-        return gradient
+    return gradient
 
 
 def numerical_gradient_net(x, t):
