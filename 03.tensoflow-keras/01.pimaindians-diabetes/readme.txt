@@ -1,3 +1,5 @@
+## Pima Indians Diabetes prediction Model(피마 인디언 당뇨병 예측 모델)
+
 01. installation
 $ pip install pandas
 # pip install sklearn
