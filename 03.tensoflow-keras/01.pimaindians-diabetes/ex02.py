@@ -1,7 +1,7 @@
 # pimaindians diabetes model fitting
 # tensor-keras
 import numpy as np
-#from matplotlib import pyplot as plt
+from matplotlib import pyplot as plt
 from tensorflow.python.keras import Sequential
 from tensorflow.python.keras.layers import Dense
 
@@ -13,11 +13,11 @@ t = np.array(dataset[:, 8])
 
 # 2. model frame config
 model = Sequential()
-model.add(Dense(50, input_size=x.shape[1], activation='relu'))
+model.add(Dense(50, input_dim=x.shape[1], activation='relu'))
 model.add(Dense(1, activation='sigmoid'))
 
 # 3. model fitting config
-model.compile(loss='binary_crossentropy', optimizer='adam', metric=['accuracy'])
+model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 # 4. model fitting
 history = model.fit(x, t, epochs=200, batch_size=10)
@@ -27,18 +27,18 @@ loss = history.history['loss']
 
 # 6. result
 result = model.evaluate(x, t, verbose=0)
-print(result)
+print(f'\n (Loss, Accuracy)=({result[0], result[1]})')
 
 # 7. predict
-data = np.array([0, 118, 84, 47, 230, 45.8, 0.551, 31])
+data = np.array([[0, 118, 84, 47, 230, 45.8, 0.551, 31]])
 predict = model.predict(data)
 percentage = float(predict[0] * 100)
-print(f'\n 당뇨 발병 확률:{percentage}')
+print(f'\n 당뇨 발병 확률:{percentage:.2f}%')
 
 # 8. graph
-# xlen = np.arange(len(loss))
-# plt.plot(xlen, loss, marker='.', c='blue', label='loss')
+xlen = np.arange(len(loss))
+plt.plot(xlen, loss, marker='.', c='blue', label='loss')
 
-# plt.xlabel('Epoch')
-# plt.ylabel('Loss')
-# plt.show()
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.show()
