@@ -1,3 +1,5 @@
+# Pimaindians Diabetes Prediction Model(피마 인디언 당뇨병 예측 모델)
+# Explore Dataset(데이터셋 탐색)
 import pandas as pd
 
 df = pd.read_csv('./dataset/pimaindians-diabetes.csv', names=['pregnant', 'plasma', 'pressure', 'thickness', 'insulin', 'BMI', 'predigree', 'age', 'class'])
