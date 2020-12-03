@@ -5,10 +5,11 @@ import pandas as pd
 from matplotlib import pyplot as plt
 from sklearn.preprocessing import LabelEncoder
 import tensorflow as tf
+
+# 1. load training/teat data
 from tensorflow.python.keras import Sequential
 from tensorflow.python.keras.layers import Dense
 
-# 1. load training/teat data
 dataset_file = './dataset/iris.csv'
 df = pd.read_csv(dataset_file, names=['sepal length', 'sepal width', 'petal lenth', 'petal width', 'species'])
 
@@ -44,10 +45,10 @@ species = ['Iris-setosa', 'Iris-virsicolor', 'Iris-virginica']
 print(f'예측 되는 품종은 {species[index]} 입니다.')
 
 # 7. graph
-# xlen = np.arange(len(loss))
-# plt.plot(xlen, loss, marker='.', c='blue', label='loss')
-# plt.xlabel('Epoch')
-# plt.ylabel('Loss')
-# plt.show()
+xlen = np.arange(len(loss))
+plt.plot(xlen, loss, marker='.', c='blue', label='loss')
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.show()
 
 
