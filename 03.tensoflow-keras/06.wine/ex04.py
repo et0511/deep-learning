@@ -1,6 +1,8 @@
 # Wine Binary Classification Model(와인 종류 분류 모델)
 # model fitting #2 - model training graph
 import os
+import shutil
+
 import pandas as pd
 import numpy as np
 from matplotlib import pyplot as plt
@@ -34,6 +36,9 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accur
 # 4. model check point config
 model_directory = os.path.join(os.getcwd(), 'model')
 if not os.path.exists(model_directory):
+    os.mkdir(model_directory)
+else:
+    shutil.rmtree(model_directory)
     os.mkdir(model_directory)
 
 checkpoint = ModelCheckpoint(
