@@ -1,6 +1,6 @@
 # Training Neural Network
 # Data Set: MNIST Handwritten Digit Dataset
-# Network: TwoLayerNet
+# Network: MultilayerNet
 # Estimation: Training Accuracy
 
 import os
@@ -13,7 +13,7 @@ from matplotlib import pyplot as plt
 try:
     sys.path.append(os.path.join(Path(os.getcwd()).parent, 'lib'))
     from mnist import load_mnist
-    import twolayernet as network
+    import MultilayerNet as network
 except ImportError:
     print('Library Module Can Not Found')
 
