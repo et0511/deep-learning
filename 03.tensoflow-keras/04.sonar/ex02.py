@@ -4,11 +4,10 @@
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 import tensorflow as tf
-
-# 1. load training/teat data
 from tensorflow.python.keras import Sequential
 from tensorflow.python.keras.layers import Dense
 
+# 1. load training/teat data
 dataset_file = './dataset/sonar.csv'
 df = pd.read_csv(dataset_file, header=None)
 
